@@ -1,0 +1,215 @@
+$unit: 0.25rem;
+$theme: #4C9673;
+
+// margin/padding
+
+$values: (
+  (name: 0, num: 0),
+  (name: 1, num: .25), 
+  (name: 2, num: .5),
+  (name: 3, num: 1),
+  (name: 4, num: 1.5),
+  (name: 5, num: 3),
+  (name: auto, num: auto)
+);
+
+@each $item in $values {
+  $name: map-get($item, name);
+  $num: map-get($item, num);
+
+  $value: #{$num}#{rem}#{!important};
+  @if ($num == auto) {
+    $value: auto#{!important};
+  }
+  
+
+  .m-#{$name} { margin: $value; }
+  .p-#{$name} { padding: $value; }
+
+  $arr:  (
+    (name: t, keys: (top)),
+    (name: b, keys: (bottom)),
+    (name: l, keys: (left)),
+    (name: r, keys: (right)),
+    (name: x, keys: (left, right)),
+    (name: y, keys: (top, bottom)),
+  );
+  @each $item in $arr {
+    $key: map-get($item,  name);
+    $whole-keys: map-get($item,  keys);
+    .m#{$key}-#{$name} {
+      @each $item in $whole-keys {
+        margin-#{$item}: $value;
+      }
+    }
+    .p#{$key}-#{$name} {
+      @each $item in $whole-keys {
+        padding-#{$item}: $value;
+      }
+    }
+  }
+}
+
+// flex
+
+$layout: (flex, block, inline, inline-block, none);
+
+@each $layout-item in $layout {
+  .d-#{$layout-item} {
+    display: #{$layout-item}#{!important};
+  }
+}
+
+$content: (
+  (key: start, value: flex-start), 
+  (key: end, value: flex-end), 
+  (key: center, value: center), 
+  (key: between, value: space-between), 
+  (key: around, value: space-around)
+);
+
+@each $item in $content {
+  .justify-content-#{map-get($item, key)} {
+    justify-content: #{map-get($item, value)}#{!important};
+  }
+}
+
+$align-items: ((key: start, value: flex-start), 
+  (key: end, value: flex-end), 
+  (key: center, value: center));
+
+@each $item in $align-items {
+  .align-items-#{map-get($item, key)} {
+    align-items: #{map-get($item, value)}#{!important};
+  }
+}
+
+
+// position
+$position: (absolute, relative, fixed, static);
+
+@each $item in $position {
+  .#{$item} {
+    position: #{$item}#{!important};
+  }
+}
+
+// color
+$colors: (
+  (
+    key: "ff",
+    color: #fff,
+  ),
+  (
+    key: "00",
+    color: #000,
+  ),
+  (
+    key: "cc",
+    color: #ccc,
+  ),
+  (
+    key: "66",
+    color: #666,
+  ),
+  (
+    key: "99",
+    color: #999,
+  ),
+  (
+    key: "theme",
+    color: $theme,
+  )
+);
+
+@each $color in $colors {
+  .text-#{map-get($color, key)} {
+    color: #{map-get($color, color)}#{!important};
+  }
+  .bg-#{map-get($color, key)} {
+    background-color: #{map-get($color, color)}#{!important};
+  }
+  .border-#{map-get($color, key)} {
+    border: #{map-get($color, color)} #{1px solid}#{!important} ;
+  }
+}
+
+// border-style
+$borderStyle: (dashed, solid, dotted, none, double);
+
+@each $style in $borderStyle {
+  .border-#{$style} {
+    border-style: #{$style}#{!important};
+  }
+}
+
+// fontSize
+$fs: (10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36);
+
+@each $item in $fs {
+  .fs-#{$item} {
+    font-size: #{$item}px#{!important};
+  }
+};
+
+// fontWeight
+$fontWeight: (
+  (name: thin, value: 100), 
+  (name: light, value: 300), 
+  (name: medium, value: 500), 
+  (name: bold, value: 700)
+);
+
+@each $item in $fontWeight {
+  .#{map-get($item, name)} {
+    font-weight: #{map-get($item, value)}#{!important};
+  }
+};
+
+
+// width/height
+$widthOrHeight: 0;
+$minOrMax: ("", "max-", "min-");
+@while $widthOrHeight <= 100 {
+  @each $item in $minOrMax {
+    .#{$item}w-#{$widthOrHeight} {
+      #{$item}width: #{$widthOrHeight}#{unquote("%")}#{!important};
+    };
+    .#{$item}h-#{$widthOrHeight} {
+      #{$item}height: #{$widthOrHeight}#{unquote("%")}#{!important};
+    };
+    .#{$item}vw-#{$widthOrHeight} {
+      #{$item}width: #{$widthOrHeight}vw#{!important};
+    };
+    .#{$item}vh-#{$widthOrHeight} {
+      #{$item}height: #{$widthOrHeight}vw#{!important};
+    };
+  }
+
+  $widthOrHeight: $widthOrHeight + 5;
+}
+// radius
+$radius: (
+  (key: round, value: 5px),
+  (key: circle, value: 50%)
+);
+@each $item in $radius {
+  $key: map-get($item, key );
+  $value: map-get($item, value );
+  .#{$key} {
+    border-radius: #{$value}#{!important};
+  }
+}
+
+// opacity
+$opacityValue: 0;
+@while $opacityValue <= 1 {
+  $name: #{"-"}#{$opacityValue * 10};
+  @if ($opacityValue == 1) {
+    $name: ""
+  }
+  .opacity#{$name} {
+    opacity: #{$opacityValue}#{!important};
+  };
+  $opacityValue: $opacityValue + 0.1
+}
