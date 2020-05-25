@@ -84,6 +84,22 @@ $align-items: ((key: start, value: flex-start),
   }
 }
 
+$flex-attr: ((key: wrap, value: wrap), (key: direction, value: column));
+@each $item in $flex-attr {
+  $key: map-get($item, 'key');
+  $value: map-get($item, 'value');
+  .flex-#{$value} {
+    flex-#{$key}: #{map-get($item, value)}#{!important};
+  }
+}
+
+//text-align
+$text-align: (center, left, right);
+@each $text in $text-align {
+  .text-#{$text} {
+    text-align: #{$text}#{!important};
+  }
+}
 
 // position
 $position: (absolute, relative, fixed, static);
