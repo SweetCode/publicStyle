@@ -211,7 +211,7 @@ $minOrMax: ("", "max-", "min-");
       #{$item}width: #{$widthOrHeight}vw#{!important};
     };
     .#{$item}vh-#{$widthOrHeight} {
-      #{$item}height: #{$widthOrHeight}vw#{!important};
+      #{$item}height: #{$widthOrHeight}vh#{!important};
     };
   }
 
