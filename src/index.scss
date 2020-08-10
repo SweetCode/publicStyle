@@ -262,3 +262,10 @@ $shadows: (
     box-shadow: #{$value}#{!important};
   }
 };
+
+$position: (left, top, right, bottom);
+@each $var in list {
+  .#{$var}-0 {
+    #{$var}: 0!important;
+  }
+}
