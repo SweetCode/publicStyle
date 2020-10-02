@@ -268,7 +268,7 @@ $shadows: (
 };
 
 $position: (left, top, right, bottom);
-@each $var in list {
+@each $var in $position {
   .#{$var}-0 {
     #{$var}: 0!important;
   }
