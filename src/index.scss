@@ -84,6 +84,12 @@ $align-items: ((key: start, value: flex-start),
   }
 }
 
+@each $item in $align-items {
+  .align-content-#{map-get($item, key)} {
+    align-content: #{map-get($item, value)}#{!important};
+  }
+}
+
 $flex-attr: ((key: wrap, value: wrap), (key: direction, value: column));
 @each $item in $flex-attr {
   $key: map-get($item, 'key');
